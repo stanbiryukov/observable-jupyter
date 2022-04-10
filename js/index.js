@@ -103,10 +103,9 @@ export const monitor = () => {
 import { Runtime, Inspector } from "@observablehq/runtime";
 
 export const embed = async (slug, into, cells, inputs = {}, api_key) => {
-  if (api_key == undefined) {
-    const moduleUrl = "https://api.observablehq.com/" + slug + ".js?v=3";
-  } else {
-    const moduleUrl = "https://api.observablehq.com/" + slug + ".js?v=3&api_key=" + api_key;
+  const moduleUrl = "https://api.observablehq.com/" + slug + ".js?v=3";
+  if (api_key) {
+    moduleUrl += "&api_key=" + api_key;
   }
   const define = (await import(moduleUrl)).default;
   const inspect = Inspector.into(into);
