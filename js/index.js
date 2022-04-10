@@ -104,7 +104,7 @@ import { Runtime, Inspector } from "@observablehq/runtime";
 
 export const embed = async (slug, into, cells, inputs = {}, api_key) => {
   const moduleUrl = "https://api.observablehq.com/" + slug + ".js?v=3";
-  if (api_key) {
+  if (typeof api_key !== "undefined") {
     moduleUrl += "&api_key=" + api_key;
   }
   const define = (await import(moduleUrl)).default;
