@@ -6,7 +6,7 @@ import random
 import html
 import html.entities as entities
 import pkg_resources
-from typing import List, Dict
+from typing import List, Dict, Optional
 
 iframe_bundle_fname = pkg_resources.resource_filename(
     "observable_jupyter", "iframe_bundle.js"
@@ -36,7 +36,7 @@ except ImportError:
 
 
 def embed(
-    slug: str, cells: List[str] = None, inputs: Dict = None, display_logo=True
+    slug: str, cells: List[str] = None, inputs: Dict = None, api_token: Optional[str] = None, display_logo=True
 ) -> None:
     """Embeds a set of cells or an entire Observable notebook.
     """
@@ -74,7 +74,7 @@ const inputs = {jsonified_inputs};
 const slug = '{slug}';
 const into = document.getElementsByTagName('div')[0];
 const cells = {repr(cells) if cells else "undefined"}
-ObservableJupyterIframe.embed(slug, into, cells, inputs).then(m => {{window.main = m;}});
+ObservableJupyterIframe.embed(slug, into, cells, inputs, api_token).then(m => {{window.main = m;}});
 ObservableJupyterIframe.monitor()
 window.addEventListener('unload', () => {{
   if (typeof window.main !== 'undefined') {{
