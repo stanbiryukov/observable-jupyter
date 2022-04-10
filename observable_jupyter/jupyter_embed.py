@@ -74,6 +74,7 @@ const inputs = {jsonified_inputs};
 const slug = '{slug}';
 const into = document.getElementsByTagName('div')[0];
 const cells = {repr(cells) if cells else "undefined"}
+const api_token = {repr(api_token) if api_token else "undefined"};
 ObservableJupyterIframe.embed(slug, into, cells, inputs, api_token).then(m => {{window.main = m;}});
 ObservableJupyterIframe.monitor()
 window.addEventListener('unload', () => {{
